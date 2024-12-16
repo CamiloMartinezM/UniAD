@@ -1,0 +1,36 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage{fancyhdr, setspace, color, soul}
+\usepackage{geometry, csquotes}
+\usepackage{amsmath,amsfonts}
+\usepackage{algorithmic}
+\usepackage{array}
+\usepackage[caption=false,font=normalsize,labelfont=sf,textfont=sf]{subfig}
+\usepackage{textcomp}
+\usepackage{stfloats}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{url} % Link bibliography links (avoid long links for clarity)
+\usepackage{breakurl} % Break URLs over multiple lines
+\usepackage{hyperref} % Link bibliography links (avoid long links for clarity)
+
+\usepackage[notes,backend=biber]{biblatex-chicago}
+\bibliography{my_bibliography.bib}
+
+%http://tex.stackexchange.com/questions/232287/supressing-some-fields-from-biblatex-footcite
+\ExecuteBibliographyOptions{firstinits=true, isbn=true, url=true, doi=true, uniquename=init}
+\DeclareBibliographyAlias{webpage}{online} %http://tex.stackexchange.com/questions/268433/bibdesk-incompatible-webpage-field
+
+\AtEveryBibitem{\clearlist{language}}
+\AtEveryBibitem{%
+      \ifentrytype{online}
+        {}
+        {\clearfield{urlyear}\clearfield{urlmonth}
+\clearfield{doi}	        
+\clearfield{urlday}}}
+
+\begin{document}
+
+\nocite{*}
+\printbibliography
+
+\end{document}
